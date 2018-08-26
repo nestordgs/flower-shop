@@ -17,3 +17,7 @@
   @extend .btn;
   @extend .btn-secondary;
 }
+
+.border-radius-0 {
+  border-radius: 0 !important;
+}

@@ -191,3 +191,36 @@ add_filter( 'wc_get_template', function ( $located, $template_name, $args = [], 
 	return $located;
 }, PHP_INT_MAX, 5 );
 
+
+
+
+
+/**
+ * Add class active tu current-menu-item
+ */
+add_filter('nav_menu_css_class' , function ($classes, $item) {
+    if( in_array('current-menu-item', $classes) ){
+        $classes[] = 'active ';
+    }
+    return $classes;
+}, 10 , 2);
+
+/**
+ * Add nav-item to <li> tag into primary_navigation
+ */
+add_filter('nav_menu_css_class', function ($classes, $item, $args) {
+    if($args->theme_location == 'primary_navigation') {
+        $classes[] = 'nav-item';
+    }
+    return $classes;
+}, 1, 3);
+
+/**
+ * Add class `nav-link` to link
+ * Condition: If theme location is auth_menu add class text-green-flower
+ */
+add_filter( 'nav_menu_link_attributes', function($atts, $item, $args) {
+    $class = ($args->theme_location == 'auth_menu') ? 'text-green-flower' : 'nav-link' ;
+    $atts['class'] = $class;
+    return $atts;
+}, 10, 3 );
